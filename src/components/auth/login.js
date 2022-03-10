@@ -1,95 +1,54 @@
-import React, { Component } from "react";
-import axios from "axios";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Component } from "react"
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
+    constructor() {
+        super()
 
-    this.state = {
-      email: "",
-      password: "",
-      errorText: ""
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-      errorText: ""
-    });
-  }
-
-  handleSubmit(event) {
-    axios
-      .post(
-        "postgres://biqhualriwkteu:7b0aafffa35665ba7417f2e9c6a54cd4d5f6a15aa8340c7acbb779f92bebea75@ec2-44-192-245-97.compute-1.amazonaws.com:5432/d363duf4ilahub",
-        {
-          client: {
-            email: this.state.email,
-            password: this.state.password
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.status === "created") {
-          this.props.handleSuccessfulAuth();
-        } else {
-          this.setState({
-            errorText: "Wrong email or password"
-          });
-          this.props.handleUnsuccessfulAuth();
+        this.state = {
+            LoggedInStatus: "NOT_LOGGED_IN"
         }
-      })
-      .catch(error => {
+    
+        this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this)
+    }
+
+    handleSuccessfulLogin() {
         this.setState({
-          errorText: "An error occurred"
-        });
-        this.props.handleUnsuccessfulAuth();
-      });
+            loggedInStatus: "LOGGED_IN"
+        })
+    }
 
-    event.preventDefault();
-  }
+    checkLoginStatus() {
+        return axios
+          .get("postgres://biqhualriwkteu:7b0aafffa35665ba7417f2e9c6a54cd4d5f6a15aa8340c7acbb779f92bebea75@ec2-44-192-245-97.compute-1.amazonaws.com:5432/d363duf4ilahub", {
+            withCredentials: true
+          })
+          .then(response => {
+            const loggedIn = response.data.logged_in;
+            const loggedInStatus = this.state.loggedInStatus;
+    
+            if (loggedIn && loggedInStatus === "LOGGED_IN") {
+              return loggedIn;
+            } else if (loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
+              this.setState({
+                loggedInStatus: "LOGGED_IN"
+              });
+            } else if (!loggedIn && loggedInStatus === "LOGGED_IN") {
+              this.setState({
+                loggedInStatus: "NOT_LOGGED_IN"
+              });
+            }
+          })
+          .catch(error => {
+            console.log("Error", error);
+          });
+      }
+    
 
-  render() {
-    return (
-      <div>
-        <h1>LOGIN TO ACCESS YOUR DASHBOARD</h1>
-
-        <div>{this.state.errorText}</div>
-
-        <form onSubmit={this.handleSubmit} className="auth-form-wrapper">
-          <div className="form-group">
-            {/* <FontAwesomeIcon icon="envelope" /> */}
-            <input
-              type="email"
-              name="email"
-              placeholder="Your email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <div className="form-group">
-            {/* <FontAwesomeIcon icon="lock" /> */}
-            <input
-              type="password"
-              name="password"
-              placeholder="Your password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </div>
-
-          <button className="btn" type="submit">
-            Login
-          </button>
-        </form>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="">
+                
+            </div>
+        )
+    }
 }

@@ -1,0 +1,55 @@
+.navigation-wrapper {
+    
+    background-color: rgb(252, 180, 47);
+    border-bottom: 3px solid black;
+    text-align: center;
+    height: 8vh;
+    margin: 1px;
+   
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        
+    }
+
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        transition: .5s ease-in-out;
+
+        .nav-link-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        
+        
+        
+            .link {
+                text-decoration: none;
+                color: black;
+            
+            
+            
+            
+            &:hover {
+                
+                text-decoration: underline;
+                
+                
+                
+            }
+        
+        }
+
+        
+    }
+    
+    
+
+    }
+    
+
+}
