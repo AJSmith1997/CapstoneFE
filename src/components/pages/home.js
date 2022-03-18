@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import axios from "axios"
 
 import Login from "../auth/login"
 import Navigation from "./navbar"
@@ -53,7 +54,7 @@ export default class Home extends Component {
             this.setState({
               errorText: "An error occurred"
             });
-            this.props.handleUnsuccessfulAuth();
+            
           });
     
         event.preventDefault();
@@ -62,33 +63,53 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div className="content-wrapper">
-            <Navigation />
+           <div className="page-wrapper">
+               <Navigation />
 
-                <div className="content">
-                    <div className="form-group">
-                
-                        <input
-                        type="email"
-                        name="email"
-                        placeholder="Your email"
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                        />
-                    </div>
 
-                    <div className="form-group">
-                        
-                        <input
-                        type="password"
-                        name="password"
-                        placeholder="Your password"
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        />
+                <div className="content-wrapper">
+                    
+
+                    <div className="content">
+                      <div className="welcome-wrapper">
+                      
+                        <h2>Welcome!</h2>
+                      
+                        <h3>Please login to continue</h3>
+
+                      </div>
+
+
+
+                        <div className="form-group">
+                    
+                            <input
+                            type="email"
+                            name="email"
+                            placeholder="Your email"
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            
+                            <input
+                            type="password"
+                            name="password"
+                            placeholder="Your password"
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            />
+                        </div>
+
+                        <div className="button-wrapper">
+                          <button type="submit" onClick={this.handleSubmit}>Login</button>
+                        </div>
+
                     </div>
-                </div>
           
+                </div>
             </div>
         )
     }

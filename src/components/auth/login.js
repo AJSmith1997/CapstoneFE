@@ -19,7 +19,7 @@ export default class Login extends Component {
 
     checkLoginStatus() {
         return axios
-          .get("postgres://biqhualriwkteu:7b0aafffa35665ba7417f2e9c6a54cd4d5f6a15aa8340c7acbb779f92bebea75@ec2-44-192-245-97.compute-1.amazonaws.com:5432/d363duf4ilahub", {
+          .get("postgresql://biqhualriwkteu:7b0aafffa35665ba7417f2e9c6a54cd4d5f6a15aa8340c7acbb779f92bebea75@ec2-44-192-245-97.compute-1.amazonaws.com:5432/d363duf4ilahub", {
             withCredentials: true
           })
           .then(response => {
