@@ -65,9 +65,10 @@ export default class Home extends Component {
         return (
            <div className="page-wrapper">
                <Navigation />
-
+               <div className="content-background">
 
                 <div className="content-wrapper">
+                  
                     
 
                     <div className="content">
@@ -108,7 +109,7 @@ export default class Home extends Component {
                         </div>
 
                     </div>
-          
+                  </div>
                 </div>
             </div>
         )
