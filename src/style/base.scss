@@ -2,9 +2,16 @@
     body {
         width: 100vw;
         height: 100vh;
-    }
-
     
+
+    @import "./base.scss";
+    @import"./navbar.scss";
+    @import "./home.scss";
+    @import"./tasks.scss";
+    @import"./task-text.scss";
+    @import"./modal.scss";
+    @import "./task-manager.scss";
+    }
 }
 
 * {
