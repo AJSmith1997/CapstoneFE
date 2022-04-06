@@ -80,7 +80,7 @@ export default class taskManager extends Component {
           
         
       
-        this.props.handleSuccessfullFormSubmission(this.state);
+        
         event.preventDefault();
       }
 
