@@ -1,0 +1,67 @@
+@media (max-width: 615px) { 
+    
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100vw;
+            background-color: lightblue;
+        
+
+            .textarea-wrapper {
+
+                display: flex;
+                flex-direction: column;
+                width: 100vw;
+                height: fit-content;
+
+                
+                .left-column {
+                
+                margin-top: 10px;
+                margin-bottom: 15px;
+                
+
+                .box {
+                    display: flex;
+                    flex-direction: column;
+                    order: 1;
+
+                    .text{
+                    order: 1;
+                    }
+                }
+            
+                }
+        
+            
+        
+        
+                .right-column {
+                
+                margin-top: 15px;
+
+                
+                    .box {
+                        display: flex;
+                        flex-direction: column;
+                        order: 2;
+
+                        
+                        .text {
+                        order: 2;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        .navbar {
+            width: 100vw;
+        }
+    
+    
+           
+    
+}

@@ -15,6 +15,8 @@ const NewArray = (props) => {
         )
     })
 
+    
+
 
 
 return array

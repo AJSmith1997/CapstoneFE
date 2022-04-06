@@ -74,15 +74,15 @@ export default class Home extends Component {
                     <div className="content">
                       <div className="welcome-wrapper">
                       
-                        <h2>Welcome!</h2>
+                        <h2>Welcome to my first official application!</h2>
                       
-                        <h3>Please login to continue</h3>
+                        {/* <h3>Please login to continue</h3> */}
 
                       </div>
 
 
 
-                        <div className="form-group">
+                        {/* <div className="form-group">
                     
                             <input
                             type="email"
@@ -106,7 +106,7 @@ export default class Home extends Component {
 
                         <div className="button-wrapper">
                           <button type="submit" onClick={this.handleSubmit}>Login</button>
-                        </div>
+                        </div> */}
 
                     </div>
                   </div>

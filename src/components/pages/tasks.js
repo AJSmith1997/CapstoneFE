@@ -15,7 +15,7 @@ import Navigation from "./navbar";
 
 
 import NewArray from "./task-text";
-import Modal from "./modal-show";
+
 
 
 
@@ -28,7 +28,8 @@ export default class Task extends Component {
 
         this.state = {
             headingClass: "left",
-            data: []
+            data: [],
+            secondData: []
             
             
             
@@ -43,7 +44,7 @@ export default class Task extends Component {
 
 
     getAllTask() {
-        fetch("http://127.0.0.1:5000/task/get")
+        fetch("https://gentle-wave-19508.herokuapp.com/task/get")
         .then(result => result.json())
         .then(result => {
             this.setState({
@@ -67,47 +68,64 @@ export default class Task extends Component {
     
     
     
-    addTask() {
-        axios
-        .post("http://127.0.0.1:5000/task/add")
-        
-        .then(result => {
-            return result
-        })
-        
-    }
+    
 
     deleteTask() {
 
         
         axios
-        .delete("http://127.0.0.1:5000/task/delete/<id>")
+        .delete("https://gentle-wave-19508.herokuapp.com/task/delete/<id>")
         
         .then(console.log("click"))
     }
    
+
+    
+        // Syntax: condition ? < expression if true> : <expression if false></expression>
+        
+
+    
     
 
     
 
 
 
-    handleClick(align) {
+        handleClick(align) {
         
         
         this.setState({
             headingClass: align,
         })
 
-        
+        {
+
+            
+            if (align === "right")  {
+                this.setState({
+                    secondData: this.state.data,
+                    data: []
+                    
+                })
+            } else {
+                    this.setState({
+                        data: this.state.secondData,
+                        secondData: []
+                        
+                    })
+                }
+            }
+        }
+
             
 
         
         
         
-    }
+    
 
     render() {
+
         
        
 
@@ -167,41 +185,41 @@ export default class Task extends Component {
                 <Navigation />
                 <div className="textarea-wrapper">
                     
-                    <div className="left-column">
-                        <h3>Tasks To Do</h3>
-                        <div className="box" >
-                            <div className="text" align={this.state.headingClass}>
-                             <NewArray data = {this.state.data} />
+                    
+                        <div className="left-column">
+                            <h3>Tasks To Do</h3>
+                            <div className="box" >
+                                <div className="text" align={this.state.headingClass}>
+                                <NewArray data = {this.state.data} />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="alignment-wrapper">
-                        <h3 className={this.state.headingClass}>{this.state.data.text}</h3>
-                        <button className="good" onClick={ () => this.handleClick("right")} >Good</button>
-                        <button className="progress" onClick={ () => this.handleClick("left")}>In Progress</button>
-                        <button className="down" onClick={ () => this.handleClick("left")}>Down</button>
-                        <button className="add" onClick={this.addTask}>Add Task</button>
-                        <button className="delete" onClick={this.deleteTask}>Delete Task</button>
-                        <Modal show={this.state.show} handleClose={this.hideModal}>
-                            <p>Modal</p>
-                        </Modal>
-
+                        <div className="alignment-wrapper">
+                            {/* <h3 className={this.state.headingClass}>{this.state.data.text}</h3> */}
+                            <button className="good" onClick={ () => this.handleClick("right")} >Good</button>
+                            <button className="progress" onClick={ () => this.handleClick("left")}>In Progress</button>
+                            
+                            
                         
-                    </div>
 
-
-                    <div className="right-column">
-                        <h3>Tasks Done</h3>
-                        <div className="box">
-                            <div className="text">
-                                {this.handleClick}
-                            </div>
-                            
                             
                         </div>
+
+
+                        <div className="right-column">
+                            <h3>Tasks Done</h3>
+                            <div className="box">
+                                <div className="text">
+                                    <NewArray data = {this.state.secondData}/>
+                                </div>
+                                
+                                
+                                </div>
+
+                        </div>
                     </div>
-                </div>
+               
             </div>
         )
     }

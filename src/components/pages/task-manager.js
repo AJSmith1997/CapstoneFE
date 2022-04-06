@@ -5,20 +5,36 @@ import axios from "axios"
 
 
 
+
+
 export default class taskManager extends Component {
     constructor() {
         super()
 
         this.state = {
             id: "",
-            text: {text: ""}
+            text: ""
 
         }
     
     
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.addTask = this.addTask.bind(this)
     
+    }
+
+    addTask() {
+        axios
+        .post("https://gentle-wave-19508.herokuapp.com/task/add",
+            {
+                text: this.state.name
+            })
+            .then((response) => {
+                console.log(response.status, response.data);
+            }).catch((error) => {
+                console.log(error)
+            });
     }
 
     handleChange(event) {
@@ -38,13 +54,31 @@ export default class taskManager extends Component {
         return formData;
       }
 
+      
+
 
       handleSubmit(event) {
-        axios.post(
-            "http://127.0.0.1:5000/task/get",
-          this.buildForm(),
+        axios
+        .post(
+            "https://gentle-wave-19508.herokuapp.com/task/add",
+            { 
+                task: {
+                    id: this.state.id,
+                    text: this.state.text
+            }
+                
+            })
+            .then((response) => {
+                response.json();
+            }).catch((error) => {
+                console.log(error)
+            });
+
+            
+        
+         
           
-        );
+        
       
         this.props.handleSuccessfullFormSubmission(this.state);
         event.preventDefault();
@@ -52,11 +86,11 @@ export default class taskManager extends Component {
 
     deleteTask() {
         axios
-        .get("http://127.0.0.1:5000/task/get")
+        .get("https://gentle-wave-19508.herokuapp.com/task/get")
         .then(result => {
             result.filter(result.id)
         })
-        .delete("http://127.0.0.1:5000/task/delete/<id>")
+        .delete("https://gentle-wave-19508.herokuapp.com/task/delete/<id>")
         
     }
 
@@ -65,7 +99,7 @@ export default class taskManager extends Component {
             <div className="task-manager-wrapper">
                 <Navigation/>
                 <div className="two-column">
-                    <form  className="portfolio-form-wrapper">
+                    <form  className="task-form-wrapper">
                     
                         <input
                             type="text"
@@ -76,7 +110,7 @@ export default class taskManager extends Component {
                         />
 
                         
-                    
+
 
             
         
@@ -84,7 +118,7 @@ export default class taskManager extends Component {
 
 
                     <div className="button-wrapper">
-                        <button onClick={this.handleSubmit}>Add Task</button>
+                        <button onClick={this.addTask}>Add Task</button>
                         <button onClick={this.deleteTask}>Remove Task</button>
 
                     </div>
