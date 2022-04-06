@@ -116,8 +116,7 @@ export default class Task extends Component {
                     })
                 }
             }
-            console.log("data", this.state.data)
-            console.log("second-data", this.state.secondData)
+           
 
 
         
