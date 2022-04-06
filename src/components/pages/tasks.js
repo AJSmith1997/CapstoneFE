@@ -104,13 +104,13 @@ export default class Task extends Component {
             if (align === "right")  {
                 this.setState({
                     secondData: this.state.data,
-                    data: []
+                    // data: []
                     
                 })
             } else {
                     this.setState({
                         data: this.state.secondData,
-                        secondData: []
+                        // secondData: []
                         
                     })
                 }
