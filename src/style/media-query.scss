@@ -6,6 +6,12 @@
             height: 100%;
             width: 100vw;
             background-color: lightblue;
+
+            .content {
+                width: fit-content;
+                height: fit-content;
+    
+            }
         
 
             .textarea-wrapper {
@@ -60,6 +66,9 @@
         .navbar {
             width: 100vw;
         }
+
+
+        
     
     
            
